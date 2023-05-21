@@ -38,6 +38,7 @@ public class BinarySearchTree<K extends Comparable<K>,V> implements Iterable<Bin
             put(root, key, value);
         }
     }
+
     private void put(Node node, K key, V value) {
         int cmp = key.compareTo(node.key);
         if (cmp < 0) {
@@ -83,4 +84,27 @@ public class BinarySearchTree<K extends Comparable<K>,V> implements Iterable<Bin
                 return node.left;
             }
         }
+        return node;
+    }
+
+    public V get(K key) {
+        Node node = getNode(root, key);
+        return (node != null) ? node.value : null;
+    }
+
+    private Node getNode(Node node, K key) {
+        if (node == null) {//checks does node is empty
+            return null;
+        }
+        int cmp = key.compareTo(node.key);
+        if (cmp < 0) {// checks if middle element is less
+            return getNode(node.left, key);
+        } else if (cmp > 0) {// checks if middle element is more
+            return getNode(node.right, key);
+        } else {
+            return node;
+        }
+    }
+    public int size() {
+        return size;//checks size of BST
     }

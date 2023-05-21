@@ -30,7 +30,6 @@ public class BinarySearchTree<K extends Comparable<K>,V> implements Iterable<Bin
         }
     }
 
-
     public void put(K key, V value) {
         if (root == null) {// checks does root is empty
             root = new Node(key, value);
@@ -39,8 +38,6 @@ public class BinarySearchTree<K extends Comparable<K>,V> implements Iterable<Bin
             put(root, key, value);
         }
     }
-
-
     private void put(Node node, K key, V value) {
         int cmp = key.compareTo(node.key);
         if (cmp < 0) {
@@ -65,7 +62,25 @@ public class BinarySearchTree<K extends Comparable<K>,V> implements Iterable<Bin
         }
     }
 
+    public void remove(K key) {
+        root = deleteNode(root, key);// delete method
 
+    }
 
-
-
+    private Node deleteNode(Node node, K key) {
+        if (node == null) {//checks does node is empty
+            return null;
+        }
+        int cmp = key.compareTo(node.key);
+        if (cmp < 0) {// checks if middle element is less
+            node.left = deleteNode(node.left, key);
+        } else if (cmp > 0) {// checks if middle element is more
+            node.right = deleteNode(node.right, key);
+        } else {
+            if (node.left == null) {
+                return node.right;
+            } else if (node.right == null) {
+                return node.left;
+            }
+        }
+    }

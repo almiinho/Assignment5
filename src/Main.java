@@ -15,5 +15,8 @@ public class Main {
         System.out.println(BST.get(2));
         System.out.println(BST.size());
         BST.remove(4);
+        for (BinarySearchTree.elem<Integer, String> elem : BST) {
+            System.out.println("key is " + elem.key + " and value is " + elem.value);
+        }
     }
 }

@@ -2,7 +2,7 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.Stack;
 
-public class BinarySearchTree<K extends Comparable<K>, V> implements Iterable<BinarySearchTree.elem<K, V>> {
+public class BinarySearchTree<K extends Comparable<K>,V> implements Iterable<BinarySearchTree.elem<K, V>> {
     private Node root;
     private int size;
 
@@ -30,7 +30,42 @@ public class BinarySearchTree<K extends Comparable<K>, V> implements Iterable<Bi
         }
     }
 
-}
+
+    public void put(K key, V value) {
+        if (root == null) {// checks does root is empty
+            root = new Node(key, value);
+            size = 1;
+        } else {
+            put(root, key, value);
+        }
+    }
+
+
+    private void put(Node node, K key, V value) {
+        int cmp = key.compareTo(node.key);
+        if (cmp < 0) {
+            if (node.left == null) { // checks does left child is empty
+                node.left = new Node(key, value);
+                size++;
+
+            } else {
+                put(node.left, key, value); // if not we put the value
+
+            }
+        } else if (cmp > 0) {
+            if (node.right == null) { // checks does right child is empty
+                node.right = new Node(key, value);
+                size++;
+
+            } else {
+                put(node.right, key, value);
+            }
+        } else {
+            node.value = value;// Update the value if the key already exists
+        }
+    }
+
+
 
 
 
